@@ -23,7 +23,7 @@ public class UrlShortenerService {
 
     public static UrlShortenerService getInstancia(){
         if(instancia==null){
-            instancia = new UrlShortenerService(5, "localhost:4200");
+            instancia = new UrlShortenerService(5, "alejandrodeleonc.me");
 //            instancia = new UrlShortenerService(5, "www.tinyurl.com/");
         }
         return instancia;

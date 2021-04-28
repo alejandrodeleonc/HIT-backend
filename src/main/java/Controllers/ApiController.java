@@ -79,11 +79,11 @@ public class ApiController {
                 });
 
 
-                get("misUrlsMasVisitadas", ctx -> {
+                get("misUrlsMasVisitadas/:cantidad", ctx -> {
                     User user = null;
                     int status = 200;
                     Map<String, Object> res = new HashMap();
-
+                    int cantidad = Integer.valueOf(ctx.pathParam("cantidad"));
 
                     try {
                         user = UserServices.getInstancia().getUserFromHeader(ctx.header("Authorization"));
@@ -97,15 +97,13 @@ public class ApiController {
 
                     if (user != null) {
 
-                        List<Url> urlList = UserServices.getInstancia().myUrlsWithMoreHits(user, 10);
+                        List<Url> urlList = UserServices.getInstancia().myUrlsWithMoreHits(user, cantidad);
 
                         if (urlList != null) {
                             res.put("urls", urlList);
 
                         } else {
-
                             res.put("msg", "Aun no tine url registradas");
-
                         }
                     }
 
@@ -133,8 +131,9 @@ public class ApiController {
 
 
                     if (user != null) {
-
-                        res.put("top", UrlDetailInfoServices.getInstancia().getTheTopAgents(cantidad));
+                        List<String> urls = UrlDetailInfoServices.getInstancia().getTheTopAgents(cantidad);
+                        System.out.println(user);
+                        res.put("top", urls);
                     }
 
                     ctx.status(status);

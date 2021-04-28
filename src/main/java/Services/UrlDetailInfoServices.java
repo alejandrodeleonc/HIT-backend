@@ -23,8 +23,8 @@ public class UrlDetailInfoServices  extends DBManage<UrlDetailInfo> {
     }
 
 
-    public HashMap<Integer, Object> getTheTopAgents(int cantidad){
-        HashMap<Integer, Object> topAgents = new HashMap();
+    public List<String> getTheTopAgents(int cantidad){
+        List<String> topAgents = new ArrayList<String>();
         String sql ="SELECT USERAGENT  FROM URL_DETAIL_INFO UDI GROUP BY USERAGENT ORDER BY COUNT(*) DESC LIMIT "+cantidad;
         EntityManager em = getEntityManager();
         int i  = 0;
@@ -32,7 +32,7 @@ public class UrlDetailInfoServices  extends DBManage<UrlDetailInfo> {
             List<Object[]> results = em.createNativeQuery(sql).getResultList();
             for (Object obj : results) {
                 System.out.println(obj);
-                topAgents.put(i,String.valueOf(obj));
+                topAgents.add(String.valueOf(obj));
                 i++;
             }
 

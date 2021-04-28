@@ -79,6 +79,10 @@ public class AuthController {
                         if (user != null) {
                             if(UserServices.getInstancia().crear(user)) {
                             msg = "Su usuario ha sido creado con exito";
+                            User userOfBD = UserServices.getInstancia().find(user.getId());
+                                LoginResponse lr = this.generacionJsonWebToken(userOfBD.getUsername());
+                                res.put("user", userOfBD);
+                                res.put("token", lr.getToken());
 
                             }else{
                             msg = "No puede utilizar este usuario";
