@@ -27,3 +27,4 @@ Luego despues de tener instalado gradle, nos dirigimos al directorio del proyect
  
 La parte visual de este proyecto esta en,  https://github.com/alejandrodeleonc/HIT-frontEnd
 
+El demo esta en: https://alejandrodeleonc.me
