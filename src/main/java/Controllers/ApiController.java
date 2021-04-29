@@ -79,6 +79,32 @@ public class ApiController {
                 });
 
 
+
+
+                get("myUrls", ctx -> {
+                    User user = null;
+                    int status = 200;
+                    Map<String, Object> res = new HashMap();
+                    try {
+                        user = UserServices.getInstancia().getUserFromHeader(ctx.header("Authorization"));
+
+                        List<Url> urls = UrlServices.getInstancia().getUrlsOfAnUser(user);
+
+                        if(urls !=null){
+                            res.put("myUrls", urls);
+                        }else{
+                            res.put("msg", "Aun no ha registrado urls");
+                        status = 409;
+                        }
+                    } catch (Exception e) {
+                        res.put("msg", "Aun no se ha registrado");
+                        status = 403;
+                    }
+                    ctx.status(status);
+                    ctx.json(res);
+
+                });
+
                 get("misUrlsMasVisitadas/:cantidad", ctx -> {
                     User user = null;
                     int status = 200;

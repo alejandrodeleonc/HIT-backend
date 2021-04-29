@@ -24,7 +24,7 @@ public class DBStart {
 
             //SERVER MODE
             Server.createTcpServer("-tcpPort",
-                    "9092",
+                    "9093",
                     "-tcpAllowOthers",
                     "-tcpDaemon").start();
             //WEB CLIENT
